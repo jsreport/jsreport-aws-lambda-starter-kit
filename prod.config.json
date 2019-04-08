@@ -5,7 +5,7 @@
         "provider": "fs"
     },
     "blobStorage": {
-        "provider": "fs"
+        "provider": "memory"
     },
     "templatingEngines": {
         "timeout": 10000

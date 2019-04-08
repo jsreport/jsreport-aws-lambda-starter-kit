@@ -9,5 +9,5 @@ const output = fs.createWriteStream('lambda.zip')
 const archive = archiver('zip')
 archive.pipe(output)
 
-archive.glob('./**/!(.local-chromium)')
+archive.glob('./**/!(.local-chromium|lambda.zip)')
 archive.finalize()

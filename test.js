@@ -1,13 +1,15 @@
 const AWS = require('aws-sdk')
 const fs = require('fs')
 
-// make sure to set AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY env variables
+//TODO set AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY env variables
 const lambda = new AWS.Lambda({
+  //TODO
   region: 'eu-west-1'
 })
 
 lambda.invoke({
-  FunctionName: 'test',
+  //TODO
+  FunctionName: 'jsreport-lambda',
   Payload: JSON.stringify({
     renderRequest: {
       template: {
