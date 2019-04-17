@@ -5,15 +5,16 @@
         "provider": "fs"
     },
     "blobStorage": {
-        "provider": "fs",
-        "dataDirectory": "/tmp/storage"
+        "provider": "memory"
     },
     "templatingEngines": {
         "timeout": 10000
     },
-    "chrome": {      
-        "launchOptions": {          
-            "args": ["--single-process"]
+    "chrome": {
+        "timeout": 60000,
+        "launchOptions": {
+            "executablePath": "/tmp/headless-chromium",
+            "args": ["--no-sandbox","--disable-dev-shm-usage", "--single-process", "--disable-gpu'"]
         }
     },
     "logger": {
