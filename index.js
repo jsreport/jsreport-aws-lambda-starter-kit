@@ -1,6 +1,6 @@
 if (!process.env.CHROME_S3_BUCKET || !process.env.CHROME_S3_KEY) {
   throw new Error(`Download headless chrome from https://github.com/adieuadieu/serverless-chrome/releases and upload it unzipped to an s3 bucket,
-                   set CHROME_S3_LINK as environment variable in AWS console`)
+                   set CHROME_S3_BUCKET and CHROME_S3_KEY as environment variable in AWS console`)
 }
 
 process.env.NODE_ENV='production'
