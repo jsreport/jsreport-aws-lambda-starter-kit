@@ -11,18 +11,19 @@
         "timeout": 10000
     },
     "chrome": {
-        "timeout": 60000,
-        "launchOptions": {
-            "executablePath": "/tmp/headless-chromium",
-            "args": ["--no-sandbox","--disable-dev-shm-usage", "--single-process", "--disable-gpu'"]
-        }
+        "timeout": 60000
     },
     "logger": {
-        "file": { "silent": true, "filename": "xxx" },
-        "error": { "silent": true }
+        "file": {
+            "silent": true,
+            "filename": "xxx"
+        },
+        "error": {
+            "silent": true
+        }
     },
     "extensions": {
-        "authentication" : {          
+        "authentication": {
             "enabled": false
         },
         "authorization": {
@@ -39,13 +40,13 @@
         },
         "fs-store": {
             "dataDirectory": "/tmp/data"
-        },  
+        },
         "import-export": {
             "enabled": false
         },
         "public-templates": {
             "enabled": false
-        },        
+        },
         "sample-template": {
             "enabled": false
         },
@@ -53,6 +54,9 @@
             "timeout": 30000
         },
         "studio": {
+            "enabled": false
+        },
+        "studio-theme-dark": {
             "enabled": false
         },
         "tags": {

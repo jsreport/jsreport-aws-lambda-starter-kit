@@ -9,7 +9,7 @@ const lambda = new AWS.Lambda({
 
 lambda.invoke({
   //TODO
-  FunctionName: 'jsreport-lambda',
+  FunctionName: 'jsfunction',
   Payload: JSON.stringify({
     renderRequest: {
       template: {
