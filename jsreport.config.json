@@ -7,12 +7,7 @@
     "blobStorage": {
         "provider": "fs"
     },
-    "templatingEngines": {
-        "timeout": 10000
-    },
-    "chrome": {
-        "timeout": 60000      
-    },  
+    "timeout": 60000,
     "extensions": {
         "studio": {
             "enabled": true
@@ -20,21 +15,18 @@
         "fs-store": {
             "dataDirectory": "data"
         },
-        "authentication" : {
+        "authentication": {
             "cookieSession": {
                 "secret": "<your strong secret>"
             },
             "admin": {
-                "username" : "admin",
+                "username": "admin",
                 "password": "password"
             },
             "enabled": false
         },
         "sample-template": {
             "createSamples": true
-        },
-        "scripts": {
-            "timeout": 30000
         }
     }
 }
