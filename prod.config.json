@@ -18,6 +18,9 @@
         }
     },
     "extensions": {
+        "licensing": {
+            "useSavedLicenseInfo": false
+        },
         "authentication": {
             "enabled": false
         },
