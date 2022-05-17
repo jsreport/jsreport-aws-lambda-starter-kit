@@ -6,9 +6,6 @@
         "shortid": "Sy5S19ncg"
     },
     "name": "invoice-main",
-    "folder": {
-        "shortid": "G3i2B3"
-    },
     "chrome": {
         "printBackground": true,
         "marginTop": "1cm",
@@ -17,11 +14,11 @@
         "marginLeft": "1cm"
     },
     "creationDate": {
-        "$$date": 1554370408350
+        "$$date": 1652806413969
     },
     "modificationDate": {
-        "$$date": 1554370408350
+        "$$date": 1652806413970
     },
-    "_id": "spWYJZ04NPmNxtt4",
+    "_id": "zcYnFseTTjFShkZl",
     "$entitySet": "templates"
 }

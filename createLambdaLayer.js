@@ -1,8 +1,9 @@
 const fs = require('fs')
 const archiver = require('archiver')
-const { promisify } = require('util')
+const FS = require('fs-extra')
+const path = require('path')
+const promisify = require('util').promisify
 const rimraf = promisify(require('rimraf'))
-const ncp = promisify(require('ncp'))
 const Promise = require('bluebird')
 
 async function pckg() {
@@ -10,7 +11,27 @@ async function pckg() {
         fs.unlinkSync('layer.zip')
     }
 
-    await ncp('node_modules/puppeteer/.local-chromium', '.local-chromium')    
+    const foldersToExcludeFromLambda = [
+        'node_modules/puppeteer/.local-chromium',
+        'node_modules/@jsreport/jsreport-studio',
+        'node_modules/@jsreport/jsreport-authentication',
+        'node_modules/@jsreport/jsreport-authorization',
+        'node_modules/@jsreport/jsreport-cli',
+        'node_modules/@jsreport/jsreport-express',
+        'node_modules/@jsreport/jsreport-freeze',
+        'node_modules/@jsreport/jsreport-import-export',
+        'node_modules/@jsreport/jsreport-public-templates',
+        'node_modules/@jsreport/jsreport-sample-template',
+        'node_modules/@jsreport/jsreport-tags',
+        'node_modules/@jsreport/jsreport-studio-theme-dark',
+        'node_modules/@jsreport/jsreport-version-control',
+    ]
+
+    for (const folder of foldersToExcludeFromLambda) {
+        await FS.remove(path.basename(folder))
+        await FS.move(folder, path.basename(folder))
+    }
+
     await cleanup()
 
     const output = fs.createWriteStream('layer.zip')
@@ -19,13 +40,19 @@ async function pckg() {
 
     archive.directory('node_modules/', 'nodejs/node_modules');  
     await archive.finalize()
-    await ncp('.local-chromium', 'node_modules/puppeteer/.local-chromium')
-    await rimraf('.local-chromium')
+    
+    for (const folder of foldersToExcludeFromLambda) {
+        await FS.move(path.basename(folder), folder)
+    }
     console.log('layer.zip is ready')
 }
 
 async function cleanup() {
-    const patterns = [`node_modules/puppeteer/.local-chromium`,
+    const patterns = [
+    `node_modules/@jsreport/**/main.js.map`,
+    `node_modules/pdfjs-dist/build`,
+    `node_modules/@jsreport/pdfjs/test`,
+    `node_modules/@jsreport/pdfjs/playground`,    
     `node_modules/**/Jenkinsfile`,
     `node_modules/**/Makefile`,
     `node_modules/**/Gulpfile.js`,
@@ -93,9 +120,7 @@ async function cleanup() {
     `node_modules/**/prettier.config.js`,
     `node_modules/**/.appveyor.yml`,
     `node_modules/**/tsconfig.json`,
-    `node_modules/**/tslint.json`,
-    `node_modules/jsreport-studio/src`,
-    `node_modules/jsreport-studio/static/dist/*.map`]
+    `node_modules/**/tslint.json`]
 
     return Promise.map(patterns, (p) => rimraf(p), { concurrency: 5 })
 }

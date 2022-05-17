@@ -11,30 +11,30 @@
     ],
     "shortid": "HJH11D83ce",
     "name": "orders-main",
-    "folder": {
-        "shortid": "erkLzi"
-    },
     "chrome": {
         "printBackground": true,
         "marginTop": "4cm",
         "marginRight": "1.5cm",
         "marginBottom": "1.5cm",
         "marginLeft": "1.5cm",
-        "waitForJS": "false"
+        "waitForJS": false
     },
     "pdfOperations": [
         {
             "type": "merge",
             "templateShortid": "SJVbqZr9f",
-            "renderForEveryPage": true
+            "renderForEveryPage": false,
+            "mergeWholeDocument": true
         }
     ],
+    "inheritedReadPermissions": [],
+    "inheritedEditPermissions": [],
     "creationDate": {
-        "$$date": 1554370408342
+        "$$date": 1652806413998
     },
     "modificationDate": {
-        "$$date": 1554370408342
+        "$$date": 1652806413998
     },
-    "_id": "VNxSpUnObcHvB9su",
+    "_id": "prbX4MvuDLbDZwS8",
     "$entitySet": "templates"
 }

@@ -3,7 +3,7 @@
     "allowLocalFilesAccess": true,
     "store": {
         "provider": "fs"
-    },
+    }, 
     "blobStorage": {
         "provider": "fs",
         "dataDirectory": "/tmp/storage"

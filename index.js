@@ -1,10 +1,10 @@
-const chromium = require('chrome-aws-lambda')
+const chromium = require('@sparticuz/chrome-aws-lambda')
 const JsReport = require('jsreport')
-const promisify = require('util').promisify
-const ncp = promisify(require('ncp'))
+const FS = require('fs-extra')
 const path = require('path')
-const fs = require('fs')
 let jsreport
+
+console.log('starting')
 
 
 const init = (async () => {    
@@ -16,14 +16,16 @@ const init = (async () => {
                 defaultViewport: chromium.defaultViewport,
                 executablePath: await chromium.executablePath,
                 headless: chromium.headless,
+                ignoreHTTPSErrors: true,
             }         
         }
     })
-    await ncp(path.join(__dirname, 'data'), '/tmp/data')
+    await FS.copy(path.join(__dirname, 'data'), '/tmp/data')
     return jsreport.init()
 })()
 
 exports.handler = async (event) => {  
+  console.log('handling event')
   await init
 
   const res = await jsreport.render(event.renderRequest)

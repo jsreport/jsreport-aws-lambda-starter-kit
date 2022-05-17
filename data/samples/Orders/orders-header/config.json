@@ -3,21 +3,20 @@
     "name": "orders-header",
     "recipe": "chrome-pdf",
     "engine": "handlebars",
-    "folder": {
-        "shortid": "erkLzi"
-    },
     "chrome": {
         "printBackground": true,
         "marginTop": "1.5cm",
         "marginRight": "1.5cm",
         "marginLeft": "1.cm"
     },
+    "inheritedReadPermissions": [],
+    "inheritedEditPermissions": [],
     "creationDate": {
-        "$$date": 1554370408334
+        "$$date": 1652806414018
     },
     "modificationDate": {
-        "$$date": 1554370408334
+        "$$date": 1652806414018
     },
-    "_id": "TqP81XOfn7fptbbp",
+    "_id": "e92KS8QvOx4ccb9T",
     "$entitySet": "templates"
 }

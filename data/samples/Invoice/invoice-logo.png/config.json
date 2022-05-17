@@ -1,15 +1,12 @@
 {
     "shortid": "SkKBCK39l",
     "name": "invoice-logo.png",
-    "folder": {
-        "shortid": "G3i2B3"
-    },
     "creationDate": {
-        "$$date": 1554370408373
+        "$$date": 1652806414140
     },
     "modificationDate": {
-        "$$date": 1554370408373
+        "$$date": 1652806414140
     },
-    "_id": "TDChqKGgl4TUAlHy",
+    "_id": "aMjAW7PK0rHC1xMu",
     "$entitySet": "assets"
 }
