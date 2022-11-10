@@ -8,7 +8,7 @@ console.log('starting')
 
 
 const init = (async () => {    
-    jsreport = JsReport({
+    jsreport = jsreport({
         configFile: path.join(__dirname, 'prod.config.json'),        
         chrome: {
             launchOptions: {
