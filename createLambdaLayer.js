@@ -5,11 +5,12 @@ const path = require('path')
 const promisify = require('util').promisify
 const rimraf = promisify(require('rimraf'))
 const Promise = require('bluebird')
+const fileUtils = require('@jsreport/jsreport-core/lib/main/extensions/fileUtils')
 
 async function pckg() {
     if (fs.existsSync('layer.zip')) {
         fs.unlinkSync('layer.zip')
-    }
+    }    
 
     const foldersToExcludeFromLambda = [
         'node_modules/puppeteer/.local-chromium',
@@ -24,26 +25,42 @@ async function pckg() {
         'node_modules/@jsreport/jsreport-sample-template',
         'node_modules/@jsreport/jsreport-tags',
         'node_modules/@jsreport/jsreport-studio-theme-dark',
-        'node_modules/@jsreport/jsreport-version-control',
+        'node_modules/@jsreport/jsreport-version-control'        
     ]
+
+    // we exclude big dep aws-sdk only when not explicitely referenced in deps
+    if (!JSON.parse(fs.readFileSync('package.json')).dependencies['aws-sdk']) {
+        foldersToExcludeFromLambda.push('node_modules/aws-sdk')
+    }
 
     for (const folder of foldersToExcludeFromLambda) {
         await FS.remove(path.basename(folder))
         await FS.move(folder, path.basename(folder))
     }
 
-    await cleanup()
-
+    await cleanup()   
+    
     const output = fs.createWriteStream('layer.zip')
     const archive = archiver('zip')
     archive.pipe(output)
+   
+    // collect extensions paths, so we don't have to crawl in runtime
+    // this helps just some 500ms for cold start
+    const extensionPaths = fileUtils.walkSync('node_modules', 'jsreport.config.js')
+    const relativeExtensionPaths = extensionPaths.map(p => path.relative(__dirname, p))
+    // archiver.append is buggy and doesnt work, need to add through directory
+    await FS.writeFile('node_modules/locations.json', JSON.stringify({
+        locations: relativeExtensionPaths    
+    }))
 
     archive.directory('node_modules/', 'nodejs/node_modules');  
+    
     await archive.finalize()
     
     for (const folder of foldersToExcludeFromLambda) {
         await FS.move(path.basename(folder), folder)
     }
+    
     console.log('layer.zip is ready')
 }
 
@@ -53,6 +70,8 @@ async function cleanup() {
     `node_modules/pdfjs-dist/build`,
     `node_modules/@jsreport/pdfjs/test`,
     `node_modules/@jsreport/pdfjs/playground`,    
+    // wont be needed after we use just single pdfjs-dist
+    'node_modules/@jsreport/pdfjs/node_modules/pdfjs-dist/legacy',
     `node_modules/**/Jenkinsfile`,
     `node_modules/**/Makefile`,
     `node_modules/**/Gulpfile.js`,
