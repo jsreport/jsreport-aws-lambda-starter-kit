@@ -2,9 +2,8 @@ const fs = require('fs')
 const archiver = require('archiver')
 const FS = require('fs-extra')
 const path = require('path')
-const promisify = require('util').promisify
-const rimraf = promisify(require('rimraf'))
-const Promise = require('bluebird')
+const { rimraf } = require('rimraf')
+
 const fileUtils = require('@jsreport/jsreport-core/lib/main/extensions/fileUtils')
 
 async function pckg() {
@@ -141,7 +140,9 @@ async function cleanup() {
     `node_modules/**/tsconfig.json`,
     `node_modules/**/tslint.json`]
 
-    return Promise.map(patterns, (p) => rimraf(p), { concurrency: 5 })
+    const { default: limit } = await import('p-limit')
+    const pLimit = limit(5)
+    return Promise.all(patterns.map((p) => pLimit(() => rimraf(p, { glob: true }))))
 }
 
 pckg().catch(console.error)

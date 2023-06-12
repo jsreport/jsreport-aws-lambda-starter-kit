@@ -1,8 +1,16 @@
-const chromium = require('@sparticuz/chrome-aws-lambda')
 const JsReport = require('jsreport')
 const FS = require('fs-extra')
 const path = require('path')
 const os = require('os')
+
+const chromium = require("@sparticuz/chromium")
+chromium.setHeadlessMode = true
+
+// Optional: Load any fonts you need. Open Sans is included by default in AWS Lambda instances
+/*await chromium.font(
+  "https://raw.githack.com/googlei18n/noto-emoji/master/fonts/NotoColorEmoji.ttf"
+)*/
+
 let jsreport
 
 console.log('starting')
@@ -17,7 +25,7 @@ const init = (async () => {
             launchOptions: {
                 args: chromium.args,
                 defaultViewport: chromium.defaultViewport,
-                executablePath: await chromium.executablePath,
+                executablePath: await chromium.executablePath(),
                 headless: chromium.headless,
                 ignoreHTTPSErrors: true,
             }         
