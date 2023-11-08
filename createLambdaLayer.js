@@ -11,8 +11,7 @@ async function pckg() {
         fs.unlinkSync('layer.zip')
     }    
 
-    const foldersToExcludeFromLambda = [
-        'node_modules/puppeteer/.local-chromium',
+    const foldersToExcludeFromLambda = [      
         'node_modules/@jsreport/jsreport-studio',
         'node_modules/@jsreport/jsreport-authentication',
         'node_modules/@jsreport/jsreport-authorization',
