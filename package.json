@@ -9,8 +9,8 @@
     "entryPoint": "server.js"
   },
   "dependencies": {
-    "@sparticuz/chromium": "117.0.0",
-    "jsreport": "4.1.0",
+    "@sparticuz/chromium": "123.0.1",
+    "jsreport": "4.3.1",
     "fs-extra": "11.1.1"
   },
   "devDependencies": {
