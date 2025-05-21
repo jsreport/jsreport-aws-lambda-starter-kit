@@ -64,6 +64,7 @@ async function pckg() {
 
 async function cleanup() {
     const patterns = [
+    `node_modules/ses`,    
     `node_modules/jsreport-exceljs/dist`,    
     `node_modules/winser-with-api`,
     `node_modules/@jsreport/**/main.js.map`,
