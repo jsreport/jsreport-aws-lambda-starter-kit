@@ -7,8 +7,9 @@ const { rimraf } = require('rimraf')
 const fileUtils = require('@jsreport/jsreport-core/lib/main/extensions/fileUtils')
 
 async function pckg() {
-    if (fs.existsSync('layer.zip')) {
-        fs.unlinkSync('layer.zip')
+    console.log('creating jsreportLayer.zip...')
+    if (fs.existsSync('jsreportLayer.zip')) {
+        fs.unlinkSync('jsreportLayer.zip')
     }    
 
     const foldersToExcludeFromLambda = [      
@@ -23,7 +24,8 @@ async function pckg() {
         'node_modules/@jsreport/jsreport-sample-template',
         'node_modules/@jsreport/jsreport-tags',
         'node_modules/@jsreport/jsreport-studio-theme-dark',
-        'node_modules/@jsreport/jsreport-version-control'        
+        'node_modules/@jsreport/jsreport-version-control',        
+        'node_modules/@sparticuz',        
     ]
 
     // we exclude big dep aws-sdk only when not explicitely referenced in deps
@@ -38,7 +40,7 @@ async function pckg() {
 
     await cleanup()   
     
-    const output = fs.createWriteStream('layer.zip')
+    const output = fs.createWriteStream('jsreportLayer.zip')
     const archive = archiver('zip')
     archive.pipe(output)
    
@@ -59,7 +61,7 @@ async function pckg() {
         await FS.move(path.basename(folder), folder)
     }
     
-    console.log('layer.zip is ready')
+    console.log('jsreportLayer.zip is ready')
 }
 
 async function cleanup() {
