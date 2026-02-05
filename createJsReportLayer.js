@@ -66,7 +66,10 @@ async function pckg() {
 
 async function cleanup() {
     const patterns = [
+    `node_modules/@jsreport/exceljs/dist`,
+    `node_modules/@types`,
     `node_modules/ses`,    
+    `node_modules/diff2html`,    
     `node_modules/jsreport-exceljs/dist`,    
     `node_modules/winser-with-api`,
     `node_modules/@jsreport/**/main.js.map`,
@@ -75,6 +78,9 @@ async function cleanup() {
     `node_modules/@jsreport/pdfjs/playground`,    
     // wont be needed after we use just single pdfjs-dist
     'node_modules/@jsreport/pdfjs/node_modules/pdfjs-dist/legacy',
+    `node_modules/**/*.ts`,
+    `node_modules/**/*.d.ts`,
+    `node_modules/**/*.d.ts.map`,    
     `node_modules/**/Jenkinsfile`,
     `node_modules/**/Makefile`,
     `node_modules/**/Gulpfile.js`,
