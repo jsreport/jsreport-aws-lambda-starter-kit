@@ -9,9 +9,9 @@
     "entryPoint": "server.js"
   },
   "dependencies": {
-    "@sparticuz/chromium": "143.0.0",
-    "jsreport": "4.11.0",
-    "fs-extra": "11.1.1"
+    "@sparticuz/chromium": "143.0.4",
+    "jsreport": "4.12.0",
+    "fs-extra": "11.3.3"
   },
   "devDependencies": {
     "aws-sdk": "2.1395.0",
